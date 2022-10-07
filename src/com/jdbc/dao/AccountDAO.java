@@ -20,8 +20,16 @@ public class AccountDAO {
 //			System.out.println(result + " rows got Updated");
 
 			// Delete
-			int result = statement.executeUpdate("delete from account where accno=1");
-			System.out.println(result + " rows got deleted");
+//			int result = statement.executeUpdate("delete from account where accno=1");
+//			System.out.println(result + " rows got deleted");
+
+			// Select
+			ResultSet rs = statement.executeQuery("select * from account");
+			while (rs.next()) { // column numbers are accno->1, lastname->2,FirstName->3,bal->4
+				System.out.println(rs.getString(2));
+				System.out.println(rs.getString(3));
+				System.out.println(rs.getInt(4));
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
