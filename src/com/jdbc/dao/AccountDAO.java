@@ -7,9 +7,11 @@ public class AccountDAO {
 	public static void main(String[] args) {
 
 		try {
-			DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "Venky1234@");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "Venky1234@");
+			System.out.println(connection);
 		} catch (SQLException e) {
-			// TODO: handle exception
+			e.printStackTrace();
+
 		}
 	}
 }
