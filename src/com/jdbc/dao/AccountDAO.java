@@ -6,10 +6,11 @@ public class AccountDAO {
 
 	public static void main(String[] args) {
 
-		try {
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "Venky1234@");
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "Venky1234@");
+				Statement statement = connection.createStatement(); // close methods are called automatically for them.
+				ResultSet rs = statement.executeQuery("select * from account");) {
+
 			System.out.println(connection);
-			Statement statement = connection.createStatement();
 
 			// Insert
 //			int result = statement.executeUpdate("insert into account values(1,'Kolapalli','Venkatesh',10000)");
@@ -24,7 +25,7 @@ public class AccountDAO {
 //			System.out.println(result + " rows got deleted");
 
 			// Select
-			ResultSet rs = statement.executeQuery("select * from account");
+
 			while (rs.next()) { // column numbers are accno->1, lastname->2,FirstName->3,bal->4
 				System.out.println(rs.getString(2));
 				System.out.println(rs.getString(3));
@@ -35,5 +36,7 @@ public class AccountDAO {
 			e.printStackTrace();
 
 		}
+		// Another method to close them is to have a finally block and close them. like
+		// connection.close
 	}
 }
